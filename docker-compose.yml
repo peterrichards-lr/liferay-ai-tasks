@@ -1,0 +1,55 @@
+services:
+  liferay:
+    image: liferay/dxp:2024.q4.7
+    ports:
+      - 8080:8080
+    volumes:
+      - ./liferay/files:/mnt/liferay/files
+      - liferay_data:/opt/liferay/data
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+  elasticsearch:
+    build:
+      dockerfile: elasticsearch/Dockerfile
+      context: .
+    image: liferay/ai-tasks-elasticsearch:1.0
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+     - 9200:9200
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -k --silent --fail http://elasticsearch:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+      start_period: 10s
+  postgres:
+    build:
+      context: .
+      dockerfile: postgres/Dockerfile
+    image: liferay/ai-tasks-postgres:1.0
+    ports:
+      - 5433:5432
+    volumes:
+      -   postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=L1freay$
+      - POSTGRES_USER=liferay
+      - POSTGRES_DB=lportal
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "lportal"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+volumes:
+  liferay_data:
+  elasticsearch_data:
+  postgres_data:
