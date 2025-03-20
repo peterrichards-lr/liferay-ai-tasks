@@ -1,0 +1,35 @@
+@use 'sass:meta';
+
+ai-tasks-admin-web {
+  @include meta.load-css('chat-preview');
+  @include meta.load-css('navigation-bar');
+  @include meta.load-css('flow-editor');
+  @include meta.load-css('flow-nodes-pane');
+
+  .loading-dots {
+    display: inline-block;
+
+    span {
+      display: inline-block;
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 50%;
+      background-color: currentColor;
+      opacity: 0.4;
+      margin-left: 0.25em;
+      animation: typing 1.5s infinite ease-in-out;
+    }
+  }
+
+  @keyframes typing {
+    0% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
+}

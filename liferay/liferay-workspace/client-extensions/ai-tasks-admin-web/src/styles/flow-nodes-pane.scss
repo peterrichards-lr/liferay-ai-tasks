@@ -1,0 +1,38 @@
+.flow-nodes-pane {
+  left: 0;
+  z-index: 1020;
+  transition: width 0.3s ease-in-out;
+  overflow-x: hidden;
+  box-shadow: var(--box-shadow-lg);
+
+  &.flow-nodes-pane-open {
+    opacity: 1;
+  }
+
+  &.flow-nodes-pane-close {
+    width: 0;
+    .flow-nodes-pane-area {
+      opacity: 0;
+    }
+  }
+
+  .sidebar-header {
+    border-bottom: 1px solid var(--gray-300);
+  }
+
+  .sidebar-header {
+    padding-top: 2rem;
+  }
+
+  .flow-nodes-pane-area {
+    padding: 0.5rem;
+    overflow: auto;
+    transition: opacity 0.15s ease;
+    .node-header-container {
+      padding: 0.5rem;
+    }
+    h4 {
+      margin: 0;
+    }
+  }
+}

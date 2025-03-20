@@ -1,0 +1,15 @@
+ai-tasks-admin-web:
+    friendlyURLMapping: ai-tasks-admin-web
+    htmlElementName: ai-tasks-admin-web
+    instanceable: false
+    name: AI Tasks Admin
+    panelAppOrder: 100
+    panelCategoryKey: control_panel.ai_tasks
+    portletCategoryName: category.hidden
+    type: customElement
+    urls:
+        - http://localhost:3000/static/js/bundle.js
+    useESM: true
+assemble:
+    - from: build/static
+      into: static

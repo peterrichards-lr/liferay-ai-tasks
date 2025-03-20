@@ -1,0 +1,9 @@
+{
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "client-extensions/ai-tasks-chat",
+            "client-extensions/ai-tasks-admin-web"
+        ]
+    }
+}

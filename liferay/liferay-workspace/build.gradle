@@ -1,0 +1,5 @@
+// Check GETTING_STARTED.markdown for information regarding usage.
+
+compileJava { 
+  options.encoding = "UTF-8" 
+}

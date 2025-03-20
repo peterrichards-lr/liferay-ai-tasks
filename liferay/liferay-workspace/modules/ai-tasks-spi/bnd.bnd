@@ -1,0 +1,9 @@
+Bundle-Name: AI Tasks SPI
+Bundle-SymbolicName: fi.soveltia.liferay.aitasks.spi
+# x-release-please-start-version
+Bundle-Version: 1.0.0
+# x-release-please-end
+Export-Package:\
+	fi.soveltia.liferay.aitasks.spi.task.context,\
+	fi.soveltia.liferay.aitasks.spi.task.node,\
+	fi.soveltia.liferay.aitasks.spi.task.tool

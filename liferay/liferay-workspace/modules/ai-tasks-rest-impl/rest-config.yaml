@@ -1,0 +1,9 @@
+apiDir: "../ai-tasks-rest-api/src/main/java"
+apiPackagePath: "fi.soveltia.liferay.aitasks.rest"
+application:
+    baseURI: "/ai-tasks"
+    className: "AiTasksRestApplication"
+    name: "AiTasksRest"
+author: "Petteri Karttunen"
+clientDir: "../ai-tasks-rest-client/src/main/java"
+testDir: "../ai-tasks-rest-test/src/testIntegration/java"

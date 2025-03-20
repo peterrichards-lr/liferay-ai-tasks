@@ -1,0 +1,9 @@
+dependencies {
+	api project(":modules:ai-tasks-api")
+	api project(":modules:ai-tasks-rest-api")
+	api project(":modules:ai-tasks-spi")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+}
+
+group = "fi.soveltia.liferay.aitasks.rest"

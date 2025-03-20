@@ -1,0 +1,13 @@
+ai-tasks-chat:
+    friendlyURLMapping: ai-tasks-chat
+    htmlElementName: ai-tasks-chat
+    instanceable: false
+    name: AI Tasks Chat
+    portletCategoryName: category.client-extensions
+    type: customElement
+    urls:
+        - http://localhost:3000/static/js/bundle.js
+    useESM: true
+assemble:
+    - from: build/static
+      into: static

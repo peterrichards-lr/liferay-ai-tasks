@@ -1,0 +1,19 @@
+Bundle-Name: AI Tasks API
+Bundle-SymbolicName: fi.soveltia.liferay.aitasks.api
+# x-release-please-start-version
+Bundle-Version: 1.0.0
+# x-release-please-end
+Export-Package:\
+	fi.soveltia.liferay.aitasks.configuration,\
+	fi.soveltia.liferay.aitasks.constants,\
+	fi.soveltia.liferay.aitasks.exception,\
+	fi.soveltia.liferay.aitasks.model,\
+	fi.soveltia.liferay.aitasks.service,\
+	fi.soveltia.liferay.aitasks.service.persistence,\
+	fi.soveltia.liferay.aitasks.task.context,\
+	fi.soveltia.liferay.aitasks.task.chat.memory,\
+	fi.soveltia.liferay.aitasks.task.node,\
+	fi.soveltia.liferay.aitasks.task.request,\
+	fi.soveltia.liferay.aitasks.task.response
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../ai-tasks-service/service.xml
