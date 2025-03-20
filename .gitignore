@@ -1,0 +1,4 @@
+liferay/files/deploy/
+liferay/files/osgi/client-extensions/
+!liferay/files/deploy/.gitkeep
+!liferay/files/osgi/client-extensions/.gitkeep
