@@ -11,10 +11,25 @@ services:
         condition: service_healthy
       postgres:
         condition: service_healthy
+      contentwizard:
+        condition: service_healthy
+  contentwizard:
+    build:
+      context: contentwizard
+      dockerfile: Dockerfile
+    image: liferay/ai-tasks-content-wizard-bun:1.0
+    ports:
+      - 3001:3001
+    healthcheck:
+      test: ["CMD-SHELL", "curl -k --silent --fail http://contentwizard:3001/ready || exit 1"]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+      start_period: 10s
   elasticsearch:
     build:
-      dockerfile: elasticsearch/Dockerfile
-      context: .
+      context: elasticsearch
+      dockerfile: Dockerfile
     image: liferay/ai-tasks-elasticsearch:1.0
     ulimits:
       memlock:
@@ -32,17 +47,17 @@ services:
       start_period: 10s
   postgres:
     build:
-      context: .
-      dockerfile: postgres/Dockerfile
+      context: postgres
+      dockerfile: Dockerfile
     image: liferay/ai-tasks-postgres:1.0
     ports:
       - 5433:5432
     volumes:
       -   postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=L1freay$
       - POSTGRES_USER=liferay
       - POSTGRES_DB=lportal
+      - POSTGRES_PASSWORD=L1freay$
     healthcheck:
       test: ["CMD-SHELL", "pg_isready", "-d", "lportal"]
       interval: 10s

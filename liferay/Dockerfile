@@ -7,6 +7,6 @@ WORKDIR /opt/app
 
 COPY liferay-workspace .
 
-RUN ./gradlew deploy
+RUN ./gradlew clean deploy
 
 ENTRYPOINT ["tail", "-f", "/dev/null"]

@@ -1,6 +1,6 @@
 FROM postgres:14-alpine
 
-COPY postgres/database /docker-entrypoint-initdb.d/init.sql
+COPY database /docker-entrypoint-initdb.d/init.sql
 USER root
 RUN chown postgres:postgres /docker-entrypoint-initdb.d/init.sql
 USER postgres
