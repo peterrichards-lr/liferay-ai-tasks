@@ -19,7 +19,7 @@ export const liferay = new Elysia()
     .state('wizardCredentials', wizardCredentialsDefault)
     .derive(({ headers, store }) => ({
         liferay: liferayHeadless(
-            getLiferayInstance(headers.authorization, headers.origin)
+            getLiferayInstance(headers.authorization)
         ),
         logger: logger.child(logger.bindings, {
             msgPrefix: crypto.randomUUID() + ' ',

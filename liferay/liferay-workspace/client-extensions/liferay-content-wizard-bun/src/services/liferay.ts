@@ -4,7 +4,7 @@ import logger from '../utils/logger';
 
 export default function getLiferayInstance(
     authorization = '',
-    prefixUrl = 'http://localhost:8080'
+    prefixUrl = 'http://liferay:8080'
 ) {
     return ky.extend({
         prefixUrl,
