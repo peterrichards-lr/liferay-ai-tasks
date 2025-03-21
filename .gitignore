@@ -1,4 +1,8 @@
 liferay/files/deploy/
+liferay/files/client-extensions/
 liferay/files/osgi/client-extensions/
 !liferay/files/deploy/.gitkeep
 !liferay/files/osgi/client-extensions/.gitkeep
+contentwizard/*
+!contentwizard/Dockerfile
+**/.DS_Store
