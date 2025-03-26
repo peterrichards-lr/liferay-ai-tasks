@@ -6,6 +6,7 @@ services:
     volumes:
       - ./liferay/files:/mnt/liferay/files
       - liferay_data:/opt/liferay/data
+      - ./certs/truststore.p12:/opt/liferay/certs/truststore.p12
     depends_on:
       postgres:
         condition: service_healthy
@@ -24,7 +25,7 @@ services:
       test:
         [
           'CMD-SHELL',
-          'curl -k --silent --fail http://contentwizard:3001/ready || exit 1',
+          'curl -k --silent http://contentwizard:3001/ready || exit 1',
         ]
       interval: 10s
       timeout: 30s
@@ -37,14 +38,11 @@ services:
     image: liferay/ai-tasks-opensearch-node:1.0
     container_name: opensearch-node1
     environment:
-      - cluster.name=liferay-cluster
       - node.name=opensearch-node1
-      - discovery.seed_hosts=opensearch-node1,opensearch-node2
-      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
       - bootstrap.memory_lock=true=
       - 'OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m'
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
-      - "DISABLE_SECURITY_PLUGIN=true"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD} 
     ulimits:
       memlock:
         soft: -1
@@ -57,11 +55,15 @@ services:
       - 9600:9600
     volumes:
       - os_node1_data:/usr/share/opensearch/data
+      - ./certs/truststore.p12:/usr/share/opensearch/config/truststore.p12
+      - ./certs/keystore.p12:/usr/share/opensearch/config/keystore.p12
+      - ./opensearch/opensearch-node1.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./opensearch/internal_users.yml:/usr/share/opensearch/config/opensearch-security/internal_users.yml
     healthcheck:
       test:
         [
           'CMD-SHELL',
-          'curl -k --silent --fail http://opensearch-node1:9200/ || exit 1',
+          'curl -k --silent https://opensearch-node1:9200/ || exit 1',
         ]
       interval: 10s
       timeout: 40s
@@ -74,14 +76,11 @@ services:
     image: liferay/ai-tasks-opensearch-node:1.0
     container_name: opensearch-node2
     environment:
-      - cluster.name=liferay-cluster
       - node.name=opensearch-node2
-      - discovery.seed_hosts=opensearch-node1,opensearch-node2
-      - cluster.initial_cluster_manager_nodes=opensearch-node1,opensearch-node2
       - bootstrap.memory_lock=true
       - 'OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m'
       - "DISABLE_INSTALL_DEMO_CONFIG=true"
-      - "DISABLE_SECURITY_PLUGIN=true"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD} 
     ulimits:
       memlock:
         soft: -1
@@ -91,11 +90,15 @@ services:
         hard: 65536
     volumes:
       - os_node2_data:/usr/share/opensearch/data
+      - ./certs/truststore.p12:/usr/share/opensearch/config/truststore.p12
+      - ./certs/keystore.p12:/usr/share/opensearch/config/keystore.p12
+      - ./opensearch/opensearch-node2.yml:/usr/share/opensearch/config/opensearch.yml
+      - ./opensearch/internal_users.yml:/usr/share/opensearch/config/opensearch-security/internal_users.yml
     healthcheck:
       test:
         [
           'CMD-SHELL',
-          'curl -k --silent --fail http://opensearch-node2:9200/ || exit 1',
+          'curl -k --silent https://opensearch-node2:9200/ || exit 1',
         ]
       interval: 10s
       timeout: 40s

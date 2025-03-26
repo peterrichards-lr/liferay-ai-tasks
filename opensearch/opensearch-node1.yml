@@ -1,0 +1,42 @@
+indices.query.bool.max_clause_count: 4096
+
+cluster.name: liferay-cluster
+http.port: 9200
+network.host: 0.0.0.0
+transport.port: 9300
+
+discovery.seed_hosts: ["opensearch-node1", "opensearch-node2"]
+cluster.initial_cluster_manager_nodes: ["opensearch-node1", "opensearch-node2"]
+
+# Transport SSL
+plugins.security.ssl.transport.enabled: true
+plugins.security.ssl.transport.keystore_alias: opensearch-node1
+plugins.security.ssl.transport.keystore_type: PKCS12
+plugins.security.ssl.transport.keystore_filepath: /usr/share/opensearch/config/keystore.p12
+plugins.security.ssl.transport.keystore_password: liferay2
+
+plugins.security.ssl.transport.truststore_type: PKCS12
+plugins.security.ssl.transport.truststore_filepath: /usr/share/opensearch/config/truststore.p12
+plugins.security.ssl.transport.truststore_password: liferay2
+
+# HTTP SSL
+plugins.security.ssl.http.enabled: true
+plugins.security.ssl.http.keystore_alias: opensearch-node1
+plugins.security.ssl.http.keystore_type: PKCS12
+plugins.security.ssl.http.keystore_filepath: /usr/share/opensearch/config/keystore.p12
+plugins.security.ssl.http.keystore_password: liferay2
+
+plugins.security.ssl.http.truststore_type: PKCS12
+plugins.security.ssl.http.truststore_filepath: /usr/share/opensearch/config/truststore.p12
+plugins.security.ssl.http.truststore_password: liferay2
+
+plugins.security.allow_unsafe_democertificates: false
+plugins.security.allow_default_init_securityindex: true
+
+# Certficiate Distinguished Names
+plugins.security.nodes_dn:
+  - 'CN=opensearch-node1,OU=SalesEngineering,O=Liferay,L=DiamondBar,ST=California,C=US'
+  - 'CN=opensearch-node2,OU=SalesEngineering,O=Liferay,L=DiamondBar,ST=California,C=US'
+
+plugins.security.authcz.admin_dn:
+  - 'CN=opensearch-admin,OU=SalesEngineering,O=Liferay,L=DiamondBar,ST=California,C=US'

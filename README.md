@@ -7,6 +7,18 @@ A Docker Compose setup to demonstrate using the AI Content Wizard and AI Tasks w
 ```
 (rm liferay/files/deploy/*.jar && rm -r liferay/files/osgi/client-extensions)
 ```
+### Setup .env file
+Create a .env file in the same directory as the docker-compose.yml containing the following where the admin password is set when first initialising the OpenSearch cluster.
+```
+OPENSEARCH_INITIAL_ADMIN_PASSWORD=
+```
+This same password needs to be updated in the com.liferay.portal.search.opensearch2.configuration.OpenSearchConnectionConfiguration-REMOTE.config (password) and used to create the hash for the internal_users.yml (admin:hash) using the [plugins/opensearch-security/tools/hash.sh script](https://opensearch.org/docs/latest/security/configuration/yaml/#internal_usersyml)
+### Generate OpenSearch certificates
+Change the <password> to the actual password.
+```
+(cd certs && ./certgen.sh -p <password>)
+```
+ The password will need to be updated in the opensearch-node*.yml (plugins.security.ssl.http.keystore_password and plugins.security.ssl.http.truststore_password) and the com.liferay.portal.search.opensearch2.configuration.OpenSearchConnectionConfiguration-REMOTE.config (truststorePassword).
 ### Deploy a DXP license
 ```
 (cd liferay/files/deploy && docker container rm -f liferay-dxp-latest && docker create --pull always --name liferay-dxp-latest liferay/dxp:latest && docker export liferay-dxp-latest | tar -xv --strip-components=3 -C . opt/liferay/deploy)

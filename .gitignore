@@ -7,3 +7,5 @@ contentwizard/*
 !contentwizard/Dockerfile
 **/.DS_Store
 .env
+certs/*
+!certs/certgen.sh

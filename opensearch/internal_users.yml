@@ -1,0 +1,10 @@
+_meta:
+  type: "internalusers"
+  config_version: 2
+
+admin:
+  hash: "$2y$12$HrbYhvn.x.sfJDQQQLZhoOsqWfdOMqUswBWFDhlNj6Z1wMmuRGSKC"
+  reserved: true
+  backend_roles:
+  - "admin"
+  description: "OpenSearch admin user"
