@@ -6,3 +6,4 @@ liferay/files/osgi/client-extensions/
 contentwizard/*
 !contentwizard/Dockerfile
 **/.DS_Store
+.env

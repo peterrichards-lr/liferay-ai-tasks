@@ -28,8 +28,8 @@ docker compose up -d --build
 This will start the following services:
 
 - PostgreSQL (§4)
-- Elasticsearch (8.11.4)
-- Liferay DXP (2024.q4.7)
+- OpenSearch (2.19.1)
+- Liferay DXP (2025.q1.4-lts)
 - AI Content Wizard CX Bun
 
 Once everything started, you need to login into Liferay DXP and configure the AI services. For example, configure the AI Content Wizard to use your OpenAI key. The services use volumes and therefore any database or document library changes will be persisted, so you only need to configure your services the first time.
